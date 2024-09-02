@@ -1,0 +1,45 @@
+[
+    {
+      "title": "Flood in City A",
+      "category": "flood",
+      "description": "Heavy rains have caused flooding in City A.",
+      "timestamp": "2024-08-31T12:00:00Z"
+    },
+    {
+      "title": "Earthquake in Region B",
+      "category": "earthquake",
+      "description": "A strong earthquake hit Region B.",
+      "timestamp": "2024-08-30T08:00:00Z"
+    },
+    {
+      "title": "Wildfire in Forest C",
+      "category": "fire",
+      "description": "A wildfire is spreading in Forest C.",
+      "timestamp": "2024-08-29T15:00:00Z"
+    },
+    {
+      "title": "Storm in Town D",
+      "category": "storm",
+      "description": "A severe storm is approaching Town D.",
+      "timestamp": "2024-08-28T18:00:00Z"
+    },
+    {
+      "title":"Land Slide in Ladakh",
+      "category":"LandSlide",
+      "description":"A landslide occured",
+      "timestamp":"2024-08-28T18:00:00Z"
+    },
+    {
+      "title":"Industrial Accident",
+      "category":"accident",
+      "description":"Accident occured",
+      "timestamp":"2024-08-29T15:00:00Z"
+    },
+    {
+      "title":"Explosion",
+      "category":"explosion",
+      "description":"Explosion Occured",
+      "timestamp":"2024-08-30T08:00:00Z"
+    }
+  ]
+  
