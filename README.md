@@ -1,16 +1,15 @@
-# sih
+Aapdarthi - Disaster Management App
 
-A new Flutter project.
+Aapdarthi is a Flutter-based mobile app that provides real-time disaster updates, offline location tracking, weather data, and emergency assistance. It is designed to assist users during natural disasters by offering essential tools like incident reporting, rescue coordination, and alerts. The app also integrates in-app donations for NGO support.
 
-## Getting Started
+Key Features:
 
-This project is a starting point for a Flutter application.
+Offline Location Access
+Real-time Disaster Updates
+Weather Information & AQI
+Chatbot Assistance
+Incident Reporting & Alerts
+Task Management with Due Dates
+NGO Donations
+Contributions are welcome! Please submit a pull request or raise an issue if you have ideas for improvements.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
