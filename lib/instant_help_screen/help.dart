@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sih/auth/dialogue/dialogue.dart';
 import 'package:sih/core/themes/app_pallete.dart';
 
 class BorderedIconTextWidget extends StatelessWidget {
@@ -27,10 +26,10 @@ class BorderedIconTextWidget extends StatelessWidget {
               color: Pallete.gradient2,
             ),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DialogueBox()),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const DialogueBox()),
+              // );
             },
           ),
           const Text('Instant Help'),

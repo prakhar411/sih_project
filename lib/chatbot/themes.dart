@@ -16,11 +16,11 @@ ThemeData lightMode = ThemeData(
     shadowColor: Colors.white,
   ),
   colorScheme: const ColorScheme.light(
-      background: Color(0xffffffff),
+      surface: Color(0xffffffff),
       primary: Pallete.gradient2,
       secondary: Pallete.gradient1),
   inputDecorationTheme:
-      InputDecorationTheme(labelStyle: TextStyle(color: Colors.blue)),
+      const InputDecorationTheme(labelStyle: TextStyle(color: Colors.blue)),
   textTheme: const TextTheme(
       titleLarge: TextStyle(
         color: Color(0xff000000),
@@ -40,7 +40,7 @@ ThemeData darkMode = ThemeData(
     shadowColor: Color(0xff625b5b),
   ),
   colorScheme: const ColorScheme.dark(
-      background: Color(0xff000000),
+      surface: Color(0xff000000),
       primary: Pallete.gradient2,
       secondary: Pallete.gradient1),
   textTheme: const TextTheme(

@@ -46,10 +46,21 @@ dependencies:
   provider: ^6.1.2
   charts_flutter:
   http: ^1.2.2
+  geolocator: ^13.0.1
+  location:
+  url_launcher: ^6.3.0
+  video_player: ^2.9.1
+  in_app_purchase: ^3.2.0
+  permission_handler: ^11.3.1
+  firebase_core:
+  firebase_auth:
+  google_sign_in:
+ 
 
 
 
 dev_dependencies:
+  flutter_launcher_icons:
   flutter_test:
     sdk: flutter
 
@@ -59,11 +70,25 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+flutter_icons:
+  android: true
+  ios: true
+  image_path: assets/logo_001.png
+
+flutter_native_splash:
+  color: "#000000" # Black background color
+  image: assets/logo_001.png # Path to your splash screen image
+  android: true
+  ios: true
+
+
+
 flutter:
 
   # The following line ensures that the Material Icons font is
@@ -76,6 +101,11 @@ flutter:
     - assets/mock_data.json
     - assets/images/
     - assets/.env
+    - assets/logo_bg.jpg
+    - assets/logo_001.png
+  
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

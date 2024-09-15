@@ -96,7 +96,7 @@ class _DisasterListScreenState extends State<DisasterListScreen> {
                   child: Text(
                 'Error: ${snapshot.error}',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               ));
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
               return const Center(

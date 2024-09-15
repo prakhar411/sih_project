@@ -1,112 +1,166 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-/// A customizable dialogue box widget that displays a grid of cards and a location URL.
-///
-/// The dialogue box has a title, a location URL, and a grid of cards. The location URL is
-// generated based on the provided [locationData]. If [locationData] is null, the location
-/// URL will be 'Location not available'.
-///
-/// The grid of cards is customizable, with options to adjust the number of columns, card
-/// height, and card spacing.
-///
-/// Example usage:
-///
-/// ```dart
-/// DialogueBox(
-///   locationData: LocationData(latitude: 37.7749, longitude: -122.4194),
-/// )
-/// ```
 class DialogueBox extends StatelessWidget {
-  /// The location data used to generate the location URL.
-  // final LocationData? locationData;
+  final Position? position;
 
-  /// Creates a new [DialogueBox] widget.
-  // const DialogueBox({super.key, this.locationData});
+  const DialogueBox({super.key, this.position});
 
   @override
   Widget build(BuildContext context) {
-    /// The location URL generated based on the provided [locationData].
-    // final String locationUrl = locationData != null
-    //     ? 'https://www.google.com/maps?q=${locationData!.latitude},${locationData!.longitude}'
-    //     : 'Location not available';
+    final String locationUrl = position != null
+        ? 'https://www.google.com/maps?q=${position!.latitude},${position!.longitude}'
+        : 'Location not available';
 
     return AlertDialog(
-      /// The title of the dialogue box.
       title: const Text(
         'Instant Help!',
         style: TextStyle(
-          fontSize: 24, // Adjust title text size if needed
+          fontSize: 24,
           fontWeight: FontWeight.bold,
         ),
       ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          /// The location URL displayed in the dialogue box.
-          Text(
-            // 'Location: $locationUrl',
-            'hello',
-            textAlign: TextAlign.left,
-            style: const TextStyle(
-              fontSize: 18, // Adjust text size
-              fontWeight: FontWeight.w500, // Adjust text weight if needed
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Location: $locationUrl',
+              textAlign: TextAlign.left,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
-          const SizedBox(height: 10),
-
-          /// The grid of cards displayed in the dialogue box.
-          SizedBox(
-            width: double.maxFinite,
-            height: 300, // Adjust height as needed
-            child: GridView.builder(
-              /// The grid delegate used to customize the grid layout.
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, // Number of columns
+            const SizedBox(height: 10),
+            SizedBox(
+              width: double.maxFinite,
+              height: 400,
+              child: GridView.count(
+                crossAxisCount: 2,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
+                children: _buildAllGridItems(context),
               ),
-
-              /// The total number of cards in the grid.
-              itemCount: 20,
-
-              /// The builder function used to create each card in the grid.
-              itemBuilder: (BuildContext context, int index) {
-                return InkWell(
-                  onTap: () {
-                    // Add your onTap logic here
-                    print('Card ${index + 1} tapped');
-                  },
-                  child: Card(
-                    elevation: 4,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Center(
-                        child: Text(
-                          'Card ${index + 1}',
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       actions: <Widget>[
-        /// The close button used to dismiss the dialogue box.
         TextButton(
           child: const Text('Close'),
           onPressed: () {
-            Navigator.of(context).pop(); // Close the dialog
+            Navigator.of(context).pop();
           },
         ),
       ],
+    );
+  }
+
+  List<Widget> _buildAllGridItems(BuildContext context) {
+    return [
+      _buildGridItem(context, 'SOS', Icons.warning_amber_outlined,
+          const Color.fromARGB(255, 255, 17, 0)),
+      _buildGridItem(context, 'Earthquake', Icons.public, Colors.orange),
+      _buildGridItem(context, 'Tsunami', Icons.water, Colors.blue),
+      _buildGridItem(context, 'Floods', Icons.cloud, Colors.teal),
+      _buildGridItem(context, 'Fire', Icons.fire_extinguisher, Colors.red),
+      _buildGridItem(context, 'Transportation Accident', Icons.directions_car,
+          Colors.green),
+      _buildGridItem(context, 'Explosion', Icons.bolt, Colors.yellow),
+      _buildGridItem(context, 'Landslide', Icons.terrain, Colors.brown),
+      _buildGridItem(context, 'Hurricane', Icons.storm, Colors.deepPurple),
+      _buildGridItem(
+          context, 'Volcanic Eruption', Icons.landscape, Colors.deepOrange),
+      _buildGridItem(context, 'Chemical Spill', Icons.science, Colors.cyan),
+      _buildGridItem(context, 'Nuclear Accident', Icons.warning, Colors.pink),
+      _buildGridItem(context, 'Tornado', Icons.cloud, Colors.indigo),
+      _buildGridItem(context, 'Power Outage', Icons.power_off, Colors.grey),
+      _buildGridItem(
+          context, 'Pandemic', Icons.health_and_safety, Colors.purple),
+      _buildGridItem(context, 'Drought', Icons.wb_sunny, Colors.amber),
+      _buildGridItem(
+          context, 'Extreme Heat', Icons.thermostat, Colors.redAccent),
+      _buildGridItem(context, 'Blizzard', Icons.ac_unit, Colors.lightBlue),
+      _buildGridItem(context, 'Cyber Attack', Icons.computer, Colors.blueGrey),
+    ];
+  }
+
+  Widget _buildGridItem(
+      BuildContext context, String title, IconData icon, Color color) {
+    return GestureDetector(
+      onTap: () {
+        if (position != null) {
+          _sendSmsWithLocation(context, title);
+        } else {
+          _showSnackBar(context, 'Location not available');
+        }
+      },
+      child: Card(
+        color: color.withOpacity(0.1),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 40, color: color),
+            const SizedBox(height: 10),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _sendSmsWithLocation(
+      BuildContext context, String disasterType) async {
+    String phoneNumber;
+    String message;
+
+    // Define specific phone number and message for "SOS"
+    if (disasterType == 'SOS') {
+      phoneNumber =
+          '9129979433'; // Replace with the actual phone number for SOS
+      message = position != null
+          ? 'SOS! I am in Danger : ${Uri.encodeFull('https://www.google.com/maps?q=${position!.latitude},${position!.longitude}').replaceAll('%3A', ':').replaceAll('%2F', '/')}. Please send immediate assistance as soon as possible'
+          : 'SOS! Location not available. Please send immediate assistance.';
+    } else {
+      phoneNumber = '6307876246'; // Default phone number for other disasters
+      message = position != null
+          ? 'I am stranded here: ${Uri.encodeFull('https://www.google.com/maps?q=${position!.latitude},${position!.longitude}').replaceAll('%3A', ':').replaceAll('%2F', '/')}. Please send help as soon as possible. Incident Type: $disasterType'
+          : 'Location not available. Please send help as soon as possible. Incident Type: $disasterType';
+    }
+
+    final Uri smsUri = Uri(
+      scheme: 'sms',
+      path: phoneNumber,
+      queryParameters: {'body': message},
+    );
+
+    try {
+      if (await canLaunchUrl(smsUri)) {
+        await launchUrl(smsUri);
+      } else {
+        _showSnackBar(context, 'Cannot send SMS');
+      }
+    } catch (e) {
+      _showSnackBar(context, 'Error: $e');
+    }
+  }
+
+  void _showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
     );
   }
 }

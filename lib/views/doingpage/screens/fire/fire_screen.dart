@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class FireScreen extends StatelessWidget {
+  const FireScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fire'),
+        title: const Text('Fire'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -15,52 +17,52 @@ class FireScreen extends StatelessWidget {
             Container(
               height: 200,
               color: Colors.grey[300],
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Video Placeholder',
                   style: TextStyle(color: Colors.black54),
                 ),
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               "Do's",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Container(
               height: 100,
               color: Colors.green[100],
-              child: Center(
+              child: const Center(
                 child: Text(
                   "Add Do's here...",
                   style: TextStyle(color: Colors.black54),
                 ),
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               "Don'ts",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Container(
               height: 100,
               color: Colors.red[100],
-              child: Center(
+              child: const Center(
                 child: Text(
                   "Add Don'ts here...",
                   style: TextStyle(color: Colors.black54),
                 ),
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               "Precautions",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Container(
               height: 100,
               color: Colors.blue[100],
-              child: Center(
+              child: const Center(
                 child: Text(
                   "Add precautions here...",
                   style: TextStyle(color: Colors.black54),

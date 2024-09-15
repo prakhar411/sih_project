@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "104338813778",
+    "project_id": "aapdarthi",
+    "storage_bucket": "aapdarthi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104338813778:android:04fa8a1279b30acff0808b",
+        "android_client_info": {
+          "package_name": "com.example.sih"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-e6G7f-4XO4YSkYLIsnhNapkW0jgGLgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

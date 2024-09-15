@@ -63,7 +63,7 @@ class AlertsScreen extends ConsumerWidget {
                   ),
                   trailing: Text(
                     alert.timestamp.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                       color: Colors.white, // Dark Grey or Black
                     ),

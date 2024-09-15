@@ -60,7 +60,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
     final currentTheme = ref.watch(themeProvider);
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         centerTitle: false,
         backgroundColor: Colors.black,
@@ -83,11 +83,11 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
         actions: [
           IconButton(
             icon: (currentTheme == ThemeMode.dark)
-                ? Icon(
+                ? const Icon(
                     Icons.light_mode,
                     color: Pallete.gradient3,
                   )
-                : Icon(
+                : const Icon(
                     Icons.dark_mode,
                     color: Pallete.gradient1,
                   ),
@@ -188,6 +188,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
                           ),
                         )
                       : GestureDetector(
+                          onTap: callGeminiModel,
                           child: Padding(
                             padding: const EdgeInsets.all(16),
                             child: Image.asset(
@@ -197,7 +198,6 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
                               color: Colors.pink,
                             ),
                           ),
-                          onTap: callGeminiModel,
                         ),
                 ],
               ),

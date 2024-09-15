@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sih/views/homepage/homepage.dart'; // Import your HomePage
 import 'package:sih/auth/signuppage/signup.dart';
 import 'package:sih/auth/widgets/custom_field.dart';
 import 'package:sih/auth/widgets/gradient_button.dart';
 import 'package:sih/core/themes/app_pallete.dart';
-import 'package:sih/views/homepage/homepage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -18,6 +20,9 @@ class _LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   void dispose() {
     emailController.dispose();
@@ -25,16 +30,49 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  Future<void> _signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser!.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await _auth.signInWithCredential(credential);
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
+    } catch (error) {
+      print('Error signing in with Google: $error');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        leading: const Icon(
-          Icons.account_circle,
-          size: 45,
+        leading: Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: ClipOval(
+            child: Image.asset(
+              'assets/logo_bg.jpg', // Path to your logo
+              fit: BoxFit.cover, // Fit the image inside the circle
+            ),
+          ),
         ),
-        title: const Text('App Name'),
+        title: Text(
+          'Aapdarthi',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.orange[800],
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
@@ -120,9 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   child: IconButton(
-                    onPressed: () {
-                      // Implement Google sign-in functionality here
-                    },
+                    onPressed: _signInWithGoogle,
                     icon: const FaIcon(
                       FontAwesomeIcons.google,
                       color: Colors.white,

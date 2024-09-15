@@ -21,8 +21,10 @@ class HomeScreen extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.notifications),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AlertsScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AlertsScreen()));
             },
           ),
           IconButton(
@@ -32,7 +34,7 @@ class HomeScreen extends ConsumerWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => RealTimeDataScreen()));
+                      builder: (context) => const RealTimeDataScreen()));
             },
           ),
         ],
